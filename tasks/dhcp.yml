@@ -1,0 +1,18 @@
+---
+- name: Copy dhcp config for oob server
+  template:
+    src: dhcpd.conf.j2
+    dest: /etc/dhcp/dhcpd.conf
+  when: "'oob-server' in group_names"
+  notify: reload dhcp
+  tags:
+    - dhcp
+
+- name: Copy dhcp hosts for oob server
+  template:
+    src: dhcpd.hosts.j2
+    dest: /etc/dhcp/dhcpd.hosts
+  when: "'oob-server' in group_names"
+  notify: reload dhcp
+  tags:
+    - dhcp

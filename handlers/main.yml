@@ -1,0 +1,13 @@
+---
+- name: reload networking
+  command: "ifreload -a"
+
+- name: reload dhcp
+  service:
+    name: dhcpd
+    state: reloaded
+
+- name: restart nginx
+  service:
+    name: nginx
+    state: restarted

@@ -1,0 +1,20 @@
+---
+- import_tasks: network.yml
+  tags:
+    - network
+
+- import_tasks: users.yml
+  tags:
+    - users
+
+- import_tasks: ansible.yml
+  tags:
+    - ansible
+
+- import_tasks: dhcp.yml
+  tags:
+    - dhcp
+
+- import_tasks: nginx.yml
+  tags:
+    - nginx

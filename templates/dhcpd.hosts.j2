@@ -1,0 +1,15 @@
+###############
+# Ansible generated config, will be overwritten!
+# /etc/dhcp/dhcpd.hosts
+################
+
+group {
+  option domain-name-servers {{ oob_server }};
+  option domain-name "oob-mgmt-net";
+  #option routers {{ oob_server }};
+  option www-server {{ oob_server }};
+  option default-url = "http://{{ oob_server }}/onie-installer";
+
+{{ oob_hosts }}
+
+}

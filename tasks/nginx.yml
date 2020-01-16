@@ -1,0 +1,37 @@
+---
+- name: ensure nginx is at the latest version
+  become: yes
+  apt:
+    name: nginx
+    state: latest
+  when: "'oob-server' in group_names"
+  notify: restart nginx
+  tags:
+    - nginx
+
+- name: start nginx
+  service:
+    name: nginx
+    state: started
+  when: "'oob-server' in group_names"
+  notify: restart nginx
+  tags:
+    - nginx
+
+- name: Copy ztp script for oob server
+  template:
+    src: ztp_oob.sh.j2
+    dest: /var/www/html/ztp_oob.sh
+  when: "'oob-server' in group_names"
+  notify: restart nginx
+  tags:
+    - nginx
+
+- name: Copy license for oob server
+  template:
+    src: {{ license }}
+    dest: /var/www/html/license
+  when: "'oob-server' in group_names"
+  notify: restart nginx
+  tags:
+    - nginx

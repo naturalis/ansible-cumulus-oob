@@ -1,0 +1,17 @@
+---
+dependencies: []
+
+galaxy_info:
+  author: fpieters
+  description: Ansible role for Cumulus out-of-band server
+  company: Naturalis Biodiversity Center
+  license: Apache2
+  min_ansible_version: 2.5
+  platforms:
+  - name: Cumulus Linux
+    versions:
+    - all
+  galaxy_tags:
+    - cumulus
+    - switches
+    - oob
