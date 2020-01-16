@@ -18,3 +18,7 @@
 - import_tasks: nginx.yml
   tags:
     - nginx
+
+- import_tasks: motd.yml
+  tags:
+    - motd

@@ -2,13 +2,19 @@
 - name: Add ansible repository
   apt_repository:
     repo:'ppa:ansible/ansible'
+  tags:
+    - ansible
 
 - name: Update apt cache
   apt:
     update_cache:true
     cache_valid_time:86400
+  tags:
+    - ansible
 
 - name: Install Ansible
   apt:
     name: ansible
     state: "present"
+  tags:
+    - ansible

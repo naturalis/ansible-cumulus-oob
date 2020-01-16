@@ -1,10 +1,27 @@
 ---
+- name: ensure dhcp-server is at the latest version
+  become: yes
+  apt:
+    name: isc-dhcp-server
+    state: latest
+  notify: restart dhcp
+  tags:
+    - dhcp
+
+- name: start dhcp
+  service:
+    name: isc-dhcp-server
+    state: started
+  notify: restart dhcp
+  tags:
+    - dhcp
+
 - name: Copy dhcp config for oob server
   template:
     src: dhcpd.conf.j2
     dest: /etc/dhcp/dhcpd.conf
   when: "'oob-server' in group_names"
-  notify: reload dhcp
+  notify: restart dhcp
   tags:
     - dhcp
 
@@ -13,6 +30,6 @@
     src: dhcpd.hosts.j2
     dest: /etc/dhcp/dhcpd.hosts
   when: "'oob-server' in group_names"
-  notify: reload dhcp
+  notify: restart dhcp
   tags:
     - dhcp

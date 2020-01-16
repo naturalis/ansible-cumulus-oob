@@ -44,7 +44,6 @@
     dest: /home/{{ item.username }}/.ssh/authorized_keys
     owner: "{{ item.username }}"
     group: "{{ item.privilege_group | default( item.username ) }}"
-
     mode: 0600
   loop: "{{ users }}"
   loop_control:

@@ -1,0 +1,27 @@
+---
+- name: Copy motd.base64 for oob server
+  file:
+    src: motd.base64
+    dest: /etc/motd.base64
+  tags:
+    - motd
+
+- name: Convert motd.base64
+  shell: base64 -d /etc/motd.base64 > /etc/motd
+  tags:
+    - motd
+
+- name: Delete motd.base64
+  file:
+    path: /etc/motd.base64
+    state: absent
+  tags:
+    - motd
+
+- name: Set mode for motd
+  file:
+    path: /etc/motd
+    mode: 755
+    state: present
+  tags:
+    - motd

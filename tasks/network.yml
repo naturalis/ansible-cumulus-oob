@@ -5,7 +5,6 @@
     dest: /etc/network/interfaces
     validate: ifup -a -s -i %s
     backup: yes
-  when: "'oob-server' in group_names"
   notify: reload networking
   tags:
     - interfaces

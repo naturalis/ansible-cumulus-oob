@@ -2,10 +2,10 @@
 - name: reload networking
   command: "ifreload -a"
 
-- name: reload dhcp
+- name: restart dhcp
   service:
-    name: dhcpd
-    state: reloaded
+    name: isc-dhcp-server
+    state: restarted
 
 - name: restart nginx
   service:
