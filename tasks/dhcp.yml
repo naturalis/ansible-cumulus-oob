@@ -20,7 +20,16 @@
   template:
     src: dhcpd.conf.j2
     dest: /etc/dhcp/dhcpd.conf
-  when: "'oob-server' in group_names"
+  when: "'oob' in group_names"
+  notify: restart dhcp
+  tags:
+    - dhcp
+
+- name: Copy dhcp default interface for oob server
+  template:
+    src: isc-dhcp-server.j2
+    dest: /etc/default/isc-dhcp-server
+  when: "'oob' in group_names"
   notify: restart dhcp
   tags:
     - dhcp
@@ -29,7 +38,7 @@
   template:
     src: dhcpd.hosts.j2
     dest: /etc/dhcp/dhcpd.hosts
-  when: "'oob-server' in group_names"
+  when: "'oob' in group_names"
   notify: restart dhcp
   tags:
     - dhcp
