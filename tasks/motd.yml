@@ -5,11 +5,7 @@
     dest: /etc/motd.base64
   tags:
     - motd
-
-- name: Convert motd.base64
-  shell: base64 -d /etc/motd.base64 > /etc/motd
-  tags:
-    - motd
+  notify: reload motd
 
 - name: Delete motd.base64
   file:
