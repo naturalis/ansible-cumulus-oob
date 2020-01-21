@@ -11,3 +11,8 @@
   service:
     name: nginx
     state: restarted
+    
+- name: reload motd 
+  shell: base64 -d /etc/motd.base64 > /etc/motd
+
+ 
