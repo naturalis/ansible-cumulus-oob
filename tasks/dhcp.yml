@@ -28,7 +28,7 @@
 - name: Copy dhcp default interface for oob server
   template:
     src: isc-dhcp-server.j2
-    dest: /etc/default/isc-dhcp-server
+    dest: /etc/default/isc-dhcpd-server
   when: "'oob' in group_names"
   notify: restart dhcp
   tags:
