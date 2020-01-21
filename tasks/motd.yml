@@ -1,6 +1,6 @@
 ---
 - name: Copy motd.base64 for oob server
-  file:
+  copy:
     src: motd.base64
     dest: /etc/motd.base64
   tags:
