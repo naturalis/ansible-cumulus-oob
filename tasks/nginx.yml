@@ -33,7 +33,7 @@
     - nginx
 
 - name: Copy license for oob server
-  template:
+  copy:
     content: "{{ license }}"
     dest: /var/www/html/license
   notify: restart nginx
