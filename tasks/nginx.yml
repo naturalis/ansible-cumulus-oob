@@ -34,7 +34,7 @@
 
 - name: Copy license for oob server
   template:
-    src: "{{ license }}"
+    content: "{{ license }}"
     dest: /var/www/html/license
   notify: restart nginx
   tags:
