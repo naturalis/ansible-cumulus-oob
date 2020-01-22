@@ -9,6 +9,7 @@ group {
   #option routers {{ oob_server }};
   option www-server {{ oob_server }};
   option default-url = "http://{{ oob_server }}/onie-installer";
+  option cumulus-provision-url "http://{{oob_server}}/ztp_oob.sh";
 
 {{ oob_hosts }}
 
