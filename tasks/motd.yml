@@ -7,12 +7,12 @@
     - motd
   notify: reload motd
 
-- name: Delete motd.base64
-  file:
-    path: /etc/motd.base64
-    state: absent
-  tags:
-    - motd
+  #- name: Delete motd.base64
+  #  file:
+  #  path: /etc/motd.base64
+  #  state: absent
+  #tags:
+  #  - motd
 
 - name: Set mode for motd
   file:
