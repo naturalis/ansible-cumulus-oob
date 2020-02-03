@@ -23,3 +23,8 @@
   tags:
     - nextcloud
     - content
+
+- import_tasks: currentfirmware.yml
+  tags:
+    - firmware
+    - content
