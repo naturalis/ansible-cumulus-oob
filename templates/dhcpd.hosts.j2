@@ -11,6 +11,6 @@ group {
   option default-url = "http://{{ oob_server }}/onie-installer";
   option cumulus-provision-url "http://{{oob_server}}/ztp_oob.sh";
 
-  include /etc/dhcp/dhcp-hosts-list;
+  include "/etc/dhcp/dhcp-hosts-list";
 
 }
