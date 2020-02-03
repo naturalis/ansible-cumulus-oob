@@ -42,3 +42,14 @@
   notify: restart dhcp
   tags:
     - dhcp
+
+- name: dhcpd-host-list 
+  lineinfile: 
+    dest: /etc/dhcp/dhcp-hosts-list 
+    regexp: "host {{ item }} {hardware ethernet {{ hostvars[item]['eth0_mac'] }}; fixed-address {{ hostvars[item]['ansible_host'] }}; option host-name \"{{ item }}\";}"
+    line:  host {{  item }} {hardware ethernet {{ hostvars[item]['eth0_mac'] }}; fixed-address {{ hostvars[item]['ansible_host'] }}; option host-name "{{ item }}";}
+#    line: "{{ hostvars[item]['ansible_host'] }}  {{ hostvars[item]['eth0_mac'] }} {{ item }}\"; } " 
+    create: true
+  with_items: "{{ groups['switches'] }}"
+  tags:
+    - dhcp
