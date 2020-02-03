@@ -14,10 +14,10 @@
   #tags:
   #  - motd
 
-- name: Set mode for motd
-  file:
-    path: /etc/motd
-    mode: 755
-    state: touch
-  tags:
-    - motd
+  #- name: Set mode for motd
+  #  file:
+  #  path: /etc/motd
+  #  mode: 755
+  #  state: touch
+  #tags:
+  #  - motd
