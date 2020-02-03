@@ -18,3 +18,8 @@
 - import_tasks: motd.yml
   tags:
     - motd
+
+- import_tasks: content.yml
+  tags:
+    - nextcloud
+    - content

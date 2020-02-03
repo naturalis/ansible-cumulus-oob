@@ -1,0 +1,36 @@
+---
+- name: python-dev
+  apt:
+    name: python3-dev
+  tags: nextcloud
+
+- name: pip3
+  apt:
+    name: python3-pip
+  tags: nextcloud
+
+- name: Install nextcloud-update script
+  pip:
+    name: git+https://github.com/MakeExpose/nextcloud-update#egg=nextcloud-update
+  tags: nextcloud
+
+- name: Provide credentials for nextcloud-update
+  copy:
+    content: |
+      {
+      "server" : "{{ nextcloud_server }}",
+      "user"   : "{{ nextcloud_user }}",
+      "password" : "{{ nextcloud_password }}"
+       }
+    dest: /home/"{{ nextcloud_system_user }}"/.nextcloud.json
+    mode: 0600
+    owner: "{{ nextcloud_system_user }}"
+    group: "{{ nextcloud_system_user }}"
+  tags: nextcloud
+
+- name: Download content from Nextcloud
+  command: "/usr/local/bin/nextcloud_update --config /home/"{{ nextcloud_system_user }}"/.nextcloud.json "{{ nextcloud_src }}" "{ nextcloud_dest }}"
+  register: update_content
+  changed_when: "'not updated' not in update_content.stderr"
+  tags: content
+
