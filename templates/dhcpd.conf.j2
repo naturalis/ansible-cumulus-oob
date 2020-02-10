@@ -26,3 +26,35 @@ subnet {{ oob_subnet }} netmask 255.255.255.0 {
 }
 
 include "/etc/dhcp/dhcpd.hosts";
+
+###############
+# Ansible generated config, will be overwritten!
+# /etc/dhcp/dhcpd.conf
+###############
+
+ddns-update-style none;
+authoritative;
+log-facility local7;
+
+option www-server code 72 = ip-address;
+option cumulus-provision-url code 239 = text;
+
+# OOB Management subnet
+shared-network oob-mgmt-net{
+  subnet {{ oob_subnet }} netmask 255.255.255.0 {
+  range {{ oob_range }};
+
+  option domain-name-servers {{ oob_server }};
+  option domain-name "oob-mgmt-net";
+  option www-server {{ oob_server }};
+  option default-url = "http://{{ oob_server }}/onie-installer";
+  option cumulus-provision-url "http://{{ oob_server }}/ztp_oob.sh";
+  option ntp-servers {{ oob_server }};
+  include "/etc/dhcp/dhcp-hosts-list";
+
+ }
+}
+
+
+
+
