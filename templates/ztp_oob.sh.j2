@@ -12,19 +12,19 @@ date "+%FT%T ztp starting script $0"
 trap error ERR
 
 # Create the user to be used by automation
-useradd -m {{ oob_user }}
-usermod --shell /bin/bash {{ oob_user }}
+useradd -m {{ oob_deploy_user }}
+usermod --shell /bin/bash {{ oob_deploy_user }}
 
 # Setup the Pre-shared SSH Key
-mkdir -p /home/{{ oob_user }}/.ssh
-wget -O /home/{{ oob_user }}/.ssh/authorized_keys http://{{ oob_server }}/{{ authorized_keys }}
+mkdir -p /home/{{ oob_deploy_user }}/.ssh
+wget -O /home/{{ oob_deploy_user }}/.ssh/authorized_keys http://{{ oob_server }}/{{ authorized_keys }}
 
 # Make sure the SSH key is stored with the correct settings
-chown -Rv {{ oob_user }}:{{ oob_user }} /home/{{ oob_user }}/
-chmod 600 /home/{{ oob_user }}/.ssh/*
+chown -Rv {{ oob_deploy_user }}:{{ oob_deploy_user }} /home/{{ oob_deploy_user }}/
+chmod 600 /home/{{ oob_deploy_user }}/.ssh/*
 
 # Add automation user to important groups
-usermod -a -G sudo,netedit,netshow {{ oob_user }}
+usermod -a -G sudo,netedit,netshow {{ oob_deploy_user }}
 
 #Set Management VRF
 sed -i '/iface eth0/a \ vrf mgmt' /etc/network/interfaces
@@ -36,7 +36,7 @@ iface mgmt
 EOT
 
 Give sudo Powahr to mgmt user
-echo "{{ oob_user }} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/10_{{ oob_user }}
+echo "{{ oob_deploy_user }} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/10_{{ oob_deploy_user }}
 
 #Install the license and restart switchd
 /usr/cumulus/bin/cl-license -i http://{{ oob_server }}/license && systemctl restart switchd.service

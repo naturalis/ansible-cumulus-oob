@@ -28,7 +28,6 @@
   template:
     src: ztp_oob.sh.j2
     dest: /var/www/html/ztp_oob.sh
-  notify: restart nginx
   tags:
     - nginx
 
@@ -36,6 +35,14 @@
   copy:
     content: "{{ license }}"
     dest: /var/www/html/license
-  notify: restart nginx
   tags:
     - nginx
+
+- name: copy deploy user ssh-keys
+  copy:
+    src: /home/{{ oob_deploy_user }}/.ssh/authorized_keys
+    dest: /var/www/html/authorized_keys
+    remote_src: yes
+  tags:
+    - nginx
+
