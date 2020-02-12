@@ -9,6 +9,12 @@
     name: python3-pip
   tags: nextcloud
 
+## FIX LATER
+# left borked itempotent intetionaly,  the should fixed
+#  in nextcloud install script
+- name: pip  install pyocclient workaround left borked itempotent intentionally  in nextcloud install script
+  command: pip3 install pyocclient
+# end work around  
 - name: Install nextcloud-update script
   pip:
     name: git+https://github.com/MakeExpose/nextcloud-update#egg=nextcloud-update
