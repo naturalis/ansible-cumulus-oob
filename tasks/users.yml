@@ -1,26 +1,7 @@
 ---
-- name: create users
-  user:
-    name: "{{ item.username }}"
-    shell: /bin/bash
-    groups:
-      - adm
-  with_items: "{{ admin_users }}"
-
-- name: set ssh_dirs
-  file:
-    state: directory
-    name: /home/{{item.username}}/.ssh
-    owner: "{{item.username}}"
-    group: adm
-    mode: 0700
-  with_items: "{{ admin_users }}"
-
-- name: set public keys
+- name: priv ssh key for deploy user
   copy:
-    content: "{{ item.key_format | default ('ssh-rsa') }} {{ item.public_key }} {{ item.username }}"
-    dest: /home/{{item.username}}/.ssh/authorized_keys
-    owner: "{{ item.username }}"
-    group: adm
-    mode: 0600
-  with_items: "{{ admin_users }}"
+    content: "{{ oob_deploy_user_priv_sskey }}"
+    dest: /home/{{ oob_deploy_user }}/.ssh/id_rsa
+    owner: "{{ oob_deploy_user }}"
+    mode: 0400
