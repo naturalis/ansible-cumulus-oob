@@ -8,6 +8,14 @@
   tags:
     - dhcp
 
+- name: stop and disable dhcp6
+  service:
+    name: isc-dhcp-server6.service
+    state: stopped
+    enabled: no
+  tags:
+    - dhcp
+
 - name: start dhcp
   service:
     name: isc-dhcp-server
