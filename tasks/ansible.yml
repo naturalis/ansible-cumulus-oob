@@ -4,6 +4,9 @@
     repo: 'ppa:ansible/ansible'
   tags:
     - ansible
+  when:
+    - ansible_facts['distribution'] == "Ubuntu"
+    - ansible_facts['distribution_major_version'] == "20"
 
 - name: Update apt cache
   apt:
