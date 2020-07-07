@@ -65,6 +65,9 @@ ifreload -a
 
 echo "$(date) INFO: ZTP IS FINISHED!"
 
+# Create handover file
+touch /tmp/ztpfinished
+
 #reboot
 exit 0
 #CUMULUS-AUTOPROVISIONING
