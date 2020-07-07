@@ -35,7 +35,7 @@ iface mgmt
   vrf-table auto
 EOT
 
-Give sudo Powahr to mgmt user
+#Give sudo Powahr to mgmt user
 echo "{{ oob_deploy_user }} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/10_{{ oob_deploy_user }}
 
 #Install the license and restart switchd
