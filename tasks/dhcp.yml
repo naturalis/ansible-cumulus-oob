@@ -34,7 +34,7 @@
   tags:
     - dhcp
 
-- name: dhcpd-host-list 
+- name: dhcpd-host-list
   template:
     src: dhcp-host-list.j2
     dest: /etc/dhcp/dhcp-hosts-list
