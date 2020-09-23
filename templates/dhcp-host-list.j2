@@ -1,0 +1,7 @@
+
+{%   for item in groups.switches %}
+
+host {{  item }} {hardware ethernet {{ hostvars[item]['eth0_mac'] }}; fixed-address {{ hostvars[item]['ansible_host'] }}; option host-name "{{ item }}";}
+
+{%   endfor %}
+

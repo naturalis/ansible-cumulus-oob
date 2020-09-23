@@ -8,14 +8,6 @@
   tags:
     - dhcp
 
-- name: stop and disable dhcp6
-  service:
-    name: isc-dhcp-server6.service
-    state: stopped
-    enabled: no
-  tags:
-    - dhcp
-
 - name: start dhcp
   service:
     name: isc-dhcp-server
@@ -43,12 +35,9 @@
     - dhcp
 
 - name: dhcpd-host-list 
-  lineinfile: 
-    dest: /etc/dhcp/dhcp-hosts-list 
-    regexp: "host {{ item }} {hardware ethernet {{ hostvars[item]['eth0_mac'] }}; fixed-address {{ hostvars[item]['ansible_host'] }}; option host-name \"{{ item }}\";}"
-    line:  host {{  item }} {hardware ethernet {{ hostvars[item]['eth0_mac'] }}; fixed-address {{ hostvars[item]['ansible_host'] }}; option host-name "{{ item }}";}
-    create: true
-  with_items: "{{ groups['switches'] }}"
-  notify: restart dhcp
+  template:
+    src: dhcp-host-list.j2
+    dest: /etc/dhcp/dhcp-hosts-list
   tags:
     - dhcp
+
