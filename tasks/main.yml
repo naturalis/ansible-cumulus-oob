@@ -3,10 +3,6 @@
   tags:
     - users
 
-- import_tasks: ansible.yml
-  tags:
-    - ansible
-
 - import_tasks: dhcp.yml
   tags:
     - dhcp
