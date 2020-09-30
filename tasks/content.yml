@@ -17,7 +17,7 @@
 # end work around  
 - name: Install nextcloud-update script
   pip:
-    name: git+https://github.com/MakeExpose/nextcloud-update#egg=nextcloud-update
+    name: git+https://gitlab.com/naturalis/mii/nextcloud-update#egg=nextcloud-update
   tags: nextcloud
 
 - name: Provide credentials for nextcloud-update
