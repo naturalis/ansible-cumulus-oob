@@ -9,12 +9,6 @@
     name: python3-pip
   tags: nextcloud
 
-## FIX LATER
-# left borked itempotent intetionaly,  the should fixed
-#  in nextcloud install script
-- name: pip  install pyocclient workaround left borked itempotent intentionally  in nextcloud install script
-  command: pip3 install pyocclient
-# end work around  
 - name: Install nextcloud-update script
   pip:
     name: git+https://gitlab.com/naturalis/mii/nextcloud-update#egg=nextcloud-update
@@ -34,9 +28,23 @@
     group: "{{ nextcloud_system_user }}"
   tags: nextcloud
 
-- name: Download content from Nextcloud
+- name: Download switch-images from Nextcloud
   command: "/usr/local/bin/nextcloud_update --config /home/{{ nextcloud_system_user }}/.nextcloud.json {{ item }} {{ nextcloud_dest }}"
   register: update_content
   changed_when: "'not updated' not in update_content.stderr"
   tags: content
   with_items: "{{ nextcloud_src }}"
+  
+- name: Download serial-line-info from Nextcloud
+  command: "/usr/local/bin/nextcloud_update --config /home/{{ nextcloud_system_user }}/.nextcloud.json 'infra/serial-line-info/serial-line-info' '/usr/local/bin/'"
+  register: update_content
+  changed_when: "'not updated' not in update_content.stderr"
+  tags: serial-line-info
+
+- name: Set serial-line-info to 0755
+  file:
+    path: /usr/local/bin/serial-line-info 
+    owner: root
+    group: root
+    mode: '0755'
+
