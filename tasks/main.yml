@@ -1,7 +1,7 @@
 ---
 - import_tasks: users.yml
   tags:
-    - users
+    - deploy_user
 
 - import_tasks: dhcp.yml
   tags:
